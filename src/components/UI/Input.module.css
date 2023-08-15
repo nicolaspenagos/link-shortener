@@ -1,0 +1,32 @@
+.input{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 10px;
+
+}
+
+.input input{
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid #262626;
+    color: azure;
+    font-size: 16px;
+    width: 270px;
+
+
+}
+
+.input input:focus{
+    outline: none;
+    border-bottom: 2px solid #434343;
+}
+
+.input input::placeholder{
+    color: rgb(148, 154, 154);
+}
+
+.input img{
+    height: 20px;
+    margin-right: 0.5rem;
+}

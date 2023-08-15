@@ -1,0 +1,14 @@
+.form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow{
+    height: 13px;
+    width: 12px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}

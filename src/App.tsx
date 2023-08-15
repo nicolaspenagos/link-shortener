@@ -1,25 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Card from './components/UI/Card';
+import classes from './App.module.css';
+import Header from "./components/Layout/Header";
+import Title from "./components/Layout/Title";
+import LinkShortener from "./components/LinkShortener/LinkShortener";
+import { useEffect } from 'react';
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 
 function App() {
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <main className={classes.main}>
+        <section data-aos="fade-down" data-aos-duration="1000">
+          <Title />
+          <LinkShortener />
+        </section>
+      </main>
+    </>
   );
 }
 

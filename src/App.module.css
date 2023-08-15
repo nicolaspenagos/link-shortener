@@ -1,0 +1,28 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+
+}
+
+section{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 47%;
+  margin-bottom: 53%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .large-title {
+    font-size: 3rem;
+   
+  }
+  .main {
+    padding: 3rem;
+  }
+}
