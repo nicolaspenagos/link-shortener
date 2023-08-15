@@ -8,7 +8,7 @@ body {
   font-size: 18px;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--mate-black);
-  color: rgb(167, 176, 176);
+  color: var(--light-gray);
 }
 .root{
   height: 100vh;
@@ -21,7 +21,9 @@ code {
 
 :root {
   --electric-green: #49f93c;
+  --transparent-electric-green: #49f93c6f;
   --electric-yellow: #d5d804;
+  --light-gray:#A7A7A7;
   --gray:#A3ACAC;
   --mate-black: #262626;
   --dark-black:#181818;

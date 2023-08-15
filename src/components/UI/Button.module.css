@@ -1,6 +1,5 @@
 .button {
   background-color: var(--mate-black);
-  border: 0;
   border-radius: 2rem;
   font-family: "Bricolage Grotesque", sans-serif;
   cursor: pointer;
@@ -12,11 +11,9 @@
   color: azure;
   border: solid 1px;
   border-color: var(--electric-green);
-  height: 53px;
   margin-left: 1rem;
-  width: 150px;
-
-  
+  height: 53px;
+  width: 10rem;
 }
 
 .button:hover {
