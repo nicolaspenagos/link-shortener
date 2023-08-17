@@ -1,8 +1,13 @@
 .input{
     display: flex;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.15rem;
     margin-left: 1rem;
+    font-family: 'Chivo', sans-serif;
+}
+
+.input div{
+    position: relative;
 }
 
 .input input{
@@ -12,6 +17,19 @@
     color: azure;
     font-size: 16px;
     width: 270px;
+    font-weight: 100;
+}
+
+.invalid{
+    border-bottom: 2px solid #803b3b !important;
+}
+
+.error-msg{
+    color: #b75555;
+    position: absolute;
+    top: 15px;
+    font-size: x-small;
+    margin-left: 2px;
 }
 
 .input input:focus{

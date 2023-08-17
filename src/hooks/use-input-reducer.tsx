@@ -79,3 +79,5 @@ const useInputReducer = (validateValue: () => boolean) => {
     }
 
 }
+
+export default useInputReducer;
