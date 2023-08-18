@@ -11,10 +11,11 @@ export const isValidUrl = (url) => {
   return !!urlPattern.test(url);
 };
 
-export const isValidHalfBack = ( url, takensUrls, backHalf)  => {
+export const isValidHalfBack = (url, takensUrls, backHalf) => {
   console.log(takensUrls);
   console.log(backHalf);
   console.log(url);
-  if (takensUrls.includes(backHalf) || !isValidUrl(url+backHalf)) return false;
+  if (takensUrls.includes(backHalf) || !isValidUrl(url + backHalf))
+    return false;
   return true;
 };

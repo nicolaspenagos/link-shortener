@@ -8,7 +8,7 @@ import { isValidUrl, isValidHalfBack } from "../../utils/validators";
 import ArrowPNG from "../../assets/arrow.png";
 import LinkPNG from "../../assets/link.png";
 
-export const takensUrls = ["","myLink", "link"];
+export const takensUrls = ["", "myLink", "link"];
 export const url = "onrway-deploy.web.app/";
 
 const LinkShortener: React.FC = () => {
@@ -25,7 +25,7 @@ const LinkShortener: React.FC = () => {
     blurHandler: shortLinkBlurHandler,
     valueChangedHandler: shortLinkChangeHandler,
     clearHandler: shortLinkClearHandler,
-  } = useInputReducer(isValidHalfBack.bind('',url, takensUrls));
+  } = useInputReducer(isValidHalfBack.bind("", url, takensUrls));
 
   return (
     <Card>
@@ -40,25 +40,25 @@ const LinkShortener: React.FC = () => {
           blurHandler={linkBlurHandler}
           changeHandler={linkChangeHandler}
         />
-        <section className={classes.domain}>
+        <section className={classes.shortlink}>
           <p className={classes.label}>Domain:</p>
           <img src={ArrowPNG} alt="Arrow convert" className={classes.arrow} />
           <img src={LinkPNG} alt="Link icon" className={classes.link} />
           <p className={classes["link-text"]}>{url}</p>
+
+          <Input
+            placeholder="example:my-link"
+            type={INPUT_TYPE.TEXT}
+            prefix=""
+            errorMsg="Taken or not valid"
+            label="Enter a back-half"
+            value={shortLinkVal || ""}
+            hasError={shortLinkHasError}
+            blurHandler={shortLinkBlurHandler}
+            changeHandler={shortLinkChangeHandler}
+          />
         </section>
-        <Input
-          placeholder="example:my-link"
-          type={INPUT_TYPE.TEXT}
-          prefix=""
-          styleClass="short"
-          errorMsg="Taken or not valid"
-          label="Enter a back-half"
-          value={shortLinkVal || ""}
-          hasError={shortLinkHasError}
-          blurHandler={shortLinkBlurHandler}
-          changeHandler={shortLinkChangeHandler}
-        />
-        <Button text="Shorten link" />
+        <Button text="Shorten link" style={{ marginLeft: "1rem" }} />
       </form>
     </Card>
   );

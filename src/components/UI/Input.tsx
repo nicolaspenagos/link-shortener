@@ -1,6 +1,11 @@
-import React, { lazy } from "react";
+import React from "react";
 import Link from "../../assets/link.png";
 import classes from "./Input.module.css";
+
+export enum INPUT_TYPE {
+  LINK,
+  TEXT,
+}
 
 const Input: React.FC<{
   placeholder: string;
@@ -9,8 +14,8 @@ const Input: React.FC<{
   value: string;
   hasError: boolean;
   errorMsg?: string;
-  styleClass?: string;
   label?: string;
+  style?: React.CSSProperties;
   blurHandler: () => void;
   changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }> = ({
@@ -20,8 +25,8 @@ const Input: React.FC<{
   value,
   hasError,
   errorMsg = "",
-  styleClass = "",
   label,
+  style = {},
   blurHandler,
   changeHandler,
 }) => {
@@ -30,16 +35,13 @@ const Input: React.FC<{
     inputIcon = <img src={Link} alt="Link" draggable={false} />;
 
   return (
-    <label className={classes.input}>
+    <label className={classes.input} style={style}>
       {inputIcon}
-      {prefix != "" && <p>{prefix}</p>}
-
+      {prefix !== "" && <p>{prefix}</p>}
       <div>
         {label && <p className={classes.label}>{label}</p>}
         <input
-          className={`${hasError ? classes.invalid : ""} ${
-            styleClass && classes[styleClass]
-          }`}
+          className={hasError ? classes.invalid : ""}
           placeholder={placeholder}
           value={value}
           onBlur={blurHandler}
@@ -52,8 +54,3 @@ const Input: React.FC<{
 };
 
 export default Input;
-
-export enum INPUT_TYPE {
-  LINK,
-  TEXT,
-}

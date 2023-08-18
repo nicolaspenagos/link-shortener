@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 3rem;
   margin-bottom: 1.5rem;
 }
 
@@ -23,16 +22,32 @@
   height: 54px;
   width: 66.9px;
   position: absolute;
-  top: 77px;
-  right: 110px;
+  top: 5rem;
+  right: 9rem;
 }
 .large-title p {
-  margin-right: 80px;
   margin-top: 15px;
 }
 
-@media (max-width: 768px) {
-  .large-title {
+@media (max-width: 1000px) {
+  .large-title img {
+    display: none;
+  }
+
+  .large-title h1 {
     font-size: 3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .large-title p {
+    font-size: 14px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  .large-title h1 {
+    font-size: 2rem;
   }
 }
