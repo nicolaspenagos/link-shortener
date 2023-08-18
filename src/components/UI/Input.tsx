@@ -1,14 +1,16 @@
-import React from "react";
+import React, { lazy } from "react";
 import Link from "../../assets/link.png";
 import classes from "./Input.module.css";
 
 const Input: React.FC<{
   placeholder: string;
-  type: string;
+  type: INPUT_TYPE;
   prefix?: string;
   value: string;
   hasError: boolean;
-  errorMsg?:string;
+  errorMsg?: string;
+  styleClass?: string;
+  label?: string;
   blurHandler: () => void;
   changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }> = ({
@@ -17,31 +19,41 @@ const Input: React.FC<{
   prefix = "",
   value,
   hasError,
-  errorMsg ="",
+  errorMsg = "",
+  styleClass = "",
+  label,
   blurHandler,
   changeHandler,
 }) => {
   let inputIcon = null;
-  if (type === INPUT_LINK_TYPE)
+  if (type === INPUT_TYPE.LINK)
     inputIcon = <img src={Link} alt="Link" draggable={false} />;
 
   return (
     <label className={classes.input}>
       {inputIcon}
       {prefix != "" && <p>{prefix}</p>}
+
       <div>
+        {label && <p className={classes.label}>{label}</p>}
         <input
-          className={hasError ? classes.invalid : ""}
+          className={`${hasError ? classes.invalid : ""} ${
+            styleClass && classes[styleClass]
+          }`}
           placeholder={placeholder}
           value={value}
           onBlur={blurHandler}
           onChange={changeHandler}
         />
-        {hasError&&<p className={classes["error-msg"]}>{errorMsg}</p>}
+        {hasError && <p className={classes["error-msg"]}>{errorMsg}</p>}
       </div>
     </label>
   );
 };
 
 export default Input;
-export const INPUT_LINK_TYPE = "_linkType";
+
+export enum INPUT_TYPE {
+  LINK,
+  TEXT,
+}

@@ -2,6 +2,32 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem;
+ 
+}
+
+.domain{
+    display: flex;
+    position: relative;
+}
+
+.label{
+    position: absolute;
+    font-size: x-small;
+    color: azure;
+    top: -19px;
+    margin-left: 64px;
+}
+
+.link-text{
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 5px;
+    color:azure;
+    margin-left: 0.5rem;
+    cursor:not-allowed;
+
 }
 
 .arrow{
@@ -10,4 +36,10 @@
     margin-left: 1rem;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.link{
+    height: 20px;
+
+    margin-left: 0.5rem;
 }

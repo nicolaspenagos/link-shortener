@@ -1,8 +1,5 @@
 .input{
     display: flex;
-    margin-top: 1rem;
-    margin-bottom: 1.15rem;
-    margin-left: 1rem;
     font-family: 'Chivo', sans-serif;
 }
 
@@ -20,6 +17,10 @@
     font-weight: 100;
 }
 
+.short{
+    width: 150px !important;
+}
+
 .invalid{
     border-bottom: 2px solid #803b3b !important;
 }
@@ -27,8 +28,16 @@
 .error-msg{
     color: #b75555;
     position: absolute;
-    top: 15px;
+    top: 16px;
     font-size: x-small;
+    margin-left: 2px;
+}
+
+.label{
+    position: absolute;
+    font-size: x-small;
+    color: azure;
+    top: -20px;
     margin-left: 2px;
 }
 

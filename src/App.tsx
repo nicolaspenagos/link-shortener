@@ -18,7 +18,7 @@ function App() {
     <>
       <Header />
       <main className={classes.main}>
-        <section data-aos="fade-down" data-aos-duration="1000">
+        <section data-aos="fade-down" data-aos-duration="1000" className={classes.content}>
           <Title />
           <LinkShortener />
         </section>

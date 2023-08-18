@@ -1,11 +1,16 @@
 import React from "react";
 import Card from "../UI/Card";
-import Input, { INPUT_LINK_TYPE } from "../UI/Input";
+import Input, { INPUT_TYPE } from "../UI/Input";
 import classes from "./LinkShortener.module.css";
-import Arrow from "../../assets/arrow.png";
 import Button from "../UI/Button";
 import useInputReducer from "../../hooks/use-input-reducer";
-import { isValidUrl } from "../../utils/validators";
+import { isValidUrl, isValidHalfBack } from "../../utils/validators";
+import ArrowPNG from "../../assets/arrow.png";
+import LinkPNG from "../../assets/link.png";
+
+export const takensUrls = ["","myLink", "link"];
+export const url = "onrway-deploy.web.app/";
+
 const LinkShortener: React.FC = () => {
   const {
     value: linkVal,
@@ -20,25 +25,34 @@ const LinkShortener: React.FC = () => {
     blurHandler: shortLinkBlurHandler,
     valueChangedHandler: shortLinkChangeHandler,
     clearHandler: shortLinkClearHandler,
-  } = useInputReducer(isValidUrl);
+  } = useInputReducer(isValidHalfBack.bind('',url, takensUrls));
 
   return (
     <Card>
       <form className={classes.form}>
         <Input
-          placeholder="Paste your long link"
-          type={INPUT_LINK_TYPE}
+          placeholder="Example: https://super-long-link.com/shorten-it"
+          type={INPUT_TYPE.LINK}
           value={linkVal || ""}
           hasError={linkHasError}
-          errorMsg="Please provide a valid link"
+          errorMsg="Provide a valid link"
+          label="Enter your long link:"
           blurHandler={linkBlurHandler}
           changeHandler={linkChangeHandler}
         />
-        <img src={Arrow} alt="Arrow convert" className={classes.arrow} />
+        <section className={classes.domain}>
+          <p className={classes.label}>Domain:</p>
+          <img src={ArrowPNG} alt="Arrow convert" className={classes.arrow} />
+          <img src={LinkPNG} alt="Link icon" className={classes.link} />
+          <p className={classes["link-text"]}>{url}</p>
+        </section>
         <Input
-          placeholder="Create your short link"
-          type={INPUT_LINK_TYPE}
+          placeholder="example:my-link"
+          type={INPUT_TYPE.TEXT}
           prefix=""
+          styleClass="short"
+          errorMsg="Taken or not valid"
+          label="Enter a back-half"
           value={shortLinkVal || ""}
           hasError={shortLinkHasError}
           blurHandler={shortLinkBlurHandler}
