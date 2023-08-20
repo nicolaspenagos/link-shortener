@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "../UI/Card";
 import Input, { INPUT_TYPE } from "../UI/Input";
 import classes from "./LinkShortener.module.css";
 import Button from "../UI/Button";
 import useInputReducer from "../../hooks/use-input-reducer";
-import { isValidUrl, isValidHalfBack } from "../../utils/validators";
+import { isValidUrl, isValidHalfBack } from "../../utils/string-validators";
 import ArrowPNG from "../../assets/arrow.png";
 import LinkPNG from "../../assets/link.png";
+import { LinksContext } from "../../store/links-context";
 
 export const takensUrls = ["", "myLink", "link"];
 export const url = "onrway-deploy.web.app/";
@@ -27,9 +28,18 @@ const LinkShortener: React.FC = () => {
     clearHandler: shortLinkClearHandler,
   } = useInputReducer(isValidHalfBack.bind("", url, takensUrls));
 
+  const linksCtx = useContext(LinksContext);
+
+  const submitHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (linkVal && shortLinkVal) linksCtx.addLink(linkVal, shortLinkVal);
+  };
+
+  const disabled = linkHasError||shortLinkHasError;
+
   return (
     <Card>
-      <form className={classes.form}>
+      <form className={classes.form} onSubmit={submitHandler}>
         <Input
           placeholder="Example: https://super-long-link.com/shorten-it"
           type={INPUT_TYPE.LINK}
@@ -58,7 +68,13 @@ const LinkShortener: React.FC = () => {
             changeHandler={shortLinkChangeHandler}
           />
         </section>
-        <Button text="Shorten link" style={{ marginLeft: "1rem" }} />
+        <Button
+          className={classes.actions}
+          text="Shorten link"
+          style={{ marginLeft: "1rem" }}
+          type="submit"
+          disabled={disabled}
+        />
       </form>
     </Card>
   );

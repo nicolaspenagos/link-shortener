@@ -1,4 +1,4 @@
-export const isValidUrl = (url) => {
+export const isValidUrl = (url:string) => {
   var urlPattern = new RegExp(
     "^(https?:\\/\\/)?" + // validate protocol
       "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
@@ -11,10 +11,7 @@ export const isValidUrl = (url) => {
   return !!urlPattern.test(url);
 };
 
-export const isValidHalfBack = (url, takensUrls, backHalf) => {
-  console.log(takensUrls);
-  console.log(backHalf);
-  console.log(url);
+export const isValidHalfBack = (url:String, takensUrls:string[], backHalf:string) => {
   if (takensUrls.includes(backHalf) || !isValidUrl(url + backHalf))
     return false;
   return true;

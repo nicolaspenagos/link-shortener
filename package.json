@@ -12,10 +12,12 @@
     "@types/react-dom": "^18.2.7",
     "@types/react-redux": "^7.1.25",
     "aos": "^2.3.4",
+    "firebase": "^10.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",
     "react-scripts": "5.0.1",
+    "react-uuid": "^2.0.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -45,6 +47,7 @@
   },
   "devDependencies": {
     "@types/aos": "^3.0.4",
-    "@types/react": "^18.2.20"
+    "@types/react": "^18.2.20",
+    "dotenv": "^16.3.1"
   }
 }

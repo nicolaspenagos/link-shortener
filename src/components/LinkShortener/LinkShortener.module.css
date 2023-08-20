@@ -29,6 +29,10 @@
   white-space: nowrap;
 }
 
+.actions button :disabled {
+    background-color: brown;
+}
+
 .arrow {
   height: 13px;
   width: 12px;
