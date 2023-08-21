@@ -12,6 +12,7 @@ export const isValidUrl = (url:string) => {
 };
 
 export const isValidHalfBack = (url:String, takensUrls:string[], backHalf:string) => {
+  console.log(takensUrls);
   if (takensUrls.includes(backHalf) || !isValidUrl(url + backHalf))
     return false;
   return true;

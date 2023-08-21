@@ -3,10 +3,12 @@ import { ref, onValue, set } from "firebase/database";
 import { database } from "../api/config";
 import uuid from "react-uuid";
 import { createContext } from "react";
+import { url } from "../components/LinkShortener/LinkShortener";
 
 type LinksObj = {
   links: string[];
   addLink: (longLink: string, shortLink: string) => void;
+  latestShortenedLink: string | null;
 };
 
 type LinkObj = {
@@ -18,12 +20,14 @@ type LinkObj = {
 export const LinksContext = createContext<LinksObj>({
   links: [],
   addLink: (longLink, shortLink) => {},
+  latestShortenedLink: null,
 });
 
 const LinksContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [links, setLinks] = useState<string[]>([]);
+  const [latestShortenedLink, setLatestShortenedLink] = useState<string|null>(null);
 
   useEffect(() => {
     const unsubscribe = onValue(ref(database, "links"), (snapshot) => {
@@ -44,12 +48,14 @@ const LinksContextProvider: React.FC<React.PropsWithChildren> = ({
         longLink,
         shortLink,
       });
+      setLatestShortenedLink(url+shortLink);
+      console.log('dasjdasjd');
     } catch (error) {
       console.error("Error writing link to the database", error);
     }
   };
   return (
-    <LinksContext.Provider value={{ links, addLink }}>
+    <LinksContext.Provider value={{ links, addLink, latestShortenedLink }}>
       {children}
     </LinksContext.Provider>
   );

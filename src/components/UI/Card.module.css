@@ -4,6 +4,7 @@
   height: fit-content;
   border-radius: 5rem;
   box-shadow: 0 0 15px 2px var(--transparent-electric-green);
+  margin: 1rem;
 }
 
 @media (max-width: 1000px) {

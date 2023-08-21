@@ -7,10 +7,10 @@ const Button: React.FC<{
   type?: "button" | "reset" | "submit" | undefined;
   disabled?:boolean
   className?:string
-}> = ({ text, style = {}, type = "button", disabled=false, className=''}) => {
+  onClick?:()=>void
+}> = ({ text, style = {}, type = "button", disabled=false, className='', onClick}) => {
   return (
-
-    <button className={`${classes.button} ${className}`} style={style} type={type} disabled={disabled}>
+    <button className={`${classes.button} ${className}`} style={style} type={type} disabled={disabled} onClick={onClick}>
       {text}
     </button>
   );

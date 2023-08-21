@@ -8,18 +8,19 @@ export enum INPUT_TYPE {
 }
 
 const Input: React.FC<{
-  placeholder: string;
+  placeholder?: string;
   type: INPUT_TYPE;
   prefix?: string;
-  value: string;
-  hasError: boolean;
+  value?: string;
+  hasError?: boolean;
   errorMsg?: string;
   label?: string;
   style?: React.CSSProperties;
-  blurHandler: () => void;
-  changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+  blurHandler?: () => void;
+  changeHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }> = ({
-  placeholder,
+  placeholder="",
   type,
   prefix = "",
   value,
@@ -27,6 +28,7 @@ const Input: React.FC<{
   errorMsg = "",
   label,
   style = {},
+  disabled = false,
   blurHandler,
   changeHandler,
 }) => {
@@ -46,6 +48,7 @@ const Input: React.FC<{
           value={value}
           onBlur={blurHandler}
           onChange={changeHandler}
+          disabled={disabled}
         />
         {hasError && <p className={classes["error-msg"]}>{errorMsg}</p>}
       </div>

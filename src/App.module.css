@@ -10,8 +10,14 @@
 .content{
   margin-left: auto;
   margin-right: auto;
-  margin-top: 47%;
-  margin-bottom: 53%;
+  margin-top: 8rem;
   display: flex;
   flex-direction: column;
+  height: 515px;
+}
+
+@media (max-width:650px){
+  .content{
+    margin-top: 0rem;
+  }
 }
