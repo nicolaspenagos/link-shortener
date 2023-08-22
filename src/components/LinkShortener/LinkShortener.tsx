@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState } from "react";
 import Card from "../UI/Card";
 import Input, { INPUT_TYPE } from "../UI/Input";
 import classes from "./LinkShortener.module.css";
@@ -10,6 +10,7 @@ import LinkPNG from "../../assets/link.png";
 import { LinksContext } from "../../store/links-context";
 import Modal from "../UI/Modal";
 import { MODAL_TYPE } from "../UI/Modal";
+import { copyToClipboard } from "../../utils/actions";
 
 export const takensUrls = ["", "myLink", "link"];
 export const url = "onrway-deploy.web.app/";
@@ -57,14 +58,19 @@ const LinkShortener: React.FC = () => {
     setShowSuccessModal(false);
   };
 
-  const submitHandler = (event: React.FormEvent) => {
+  const submitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (isFormValid) {
-      linksCtx.addLink(linkVal, shortLinkVal);
-      handleOpenSuccessModal();
-      linkClearHandler();
-      shortLinkClearHandler();
+      try {
+        const shortenedLink = await linksCtx.addLink(linkVal, shortLinkVal);
+        copyToClipboard(shortenedLink || "");
+        handleOpenSuccessModal();
+        linkClearHandler();
+        shortLinkClearHandler();
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
     } else {
       handleOpenErrorModal();
     }
@@ -72,10 +78,10 @@ const LinkShortener: React.FC = () => {
 
   const errorMsgList = (
     <ul>
-      {(linkVal == "" || linkHasError) && (
+      {(linkVal === "" || linkHasError) && (
         <li>Please provide a valid long link</li>
       )}
-      {(shortLinkVal == "" || shortLinkHasError) && (
+      {(shortLinkVal === "" || shortLinkHasError) && (
         <li>Please provide a valid back-half</li>
       )}
     </ul>
@@ -136,11 +142,7 @@ const LinkShortener: React.FC = () => {
             text="Shorten link"
             style={{ marginLeft: "1rem" }}
             type="submit"
-            onClick={() => {
-              console.log("JAJA");
-            }}
           />
-        
         </form>
       </Card>
     </>

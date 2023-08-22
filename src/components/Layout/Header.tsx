@@ -1,8 +1,7 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import classes from "./Header.module.css";
 import { LinksContext } from "../../store/links-context";
 const Header: React.FC = () => {
-
   const linksCtx = useContext(LinksContext);
 
   return (
@@ -11,7 +10,10 @@ const Header: React.FC = () => {
       <nav>
         <h4>URL shortener</h4>
         <h4>
-          <span>{linksCtx.links.length}</span> short links generated!
+          <span>
+            {linksCtx.links.length > 0 ? linksCtx.links.length : "⏳"}
+          </span>{" "}
+          short links generated!
         </h4>
       </nav>
     </header>

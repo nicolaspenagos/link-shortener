@@ -1,0 +1,23 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+}
+
+.content {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8rem;
+  display: flex;
+  flex-direction: column;
+  height: 515px;
+}
+
+@media (max-width: 650px) {
+  .content {
+    margin-top: 0rem;
+  }
+}

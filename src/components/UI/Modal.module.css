@@ -7,6 +7,8 @@
   border-radius: 1rem;
   opacity: 1;
   color: azure;
+  font-size: 16px;
+  font-family: "Chivo", sans-serif;
 }
 
 .error {
@@ -14,8 +16,9 @@
   box-shadow: 0 0 15px 2px var(--red);
 }
 
-.success{
-    background-color: var(--sucess-green);
+.success {
+  background-color: var(--sucess-green);
+  box-shadow: 0 0 15px 2px var(--sucess-shadow);
 }
 
 .transparent {
@@ -26,6 +29,11 @@
   padding: 0.5rem;
   padding-right: 2rem;
   display: flex;
+}
+
+.content article{
+  display: flex;
+  align-items: center;
 }
 
 .content aside {
@@ -40,8 +48,6 @@ ul {
 li {
   margin-left: 1rem;
   margin-right: 0.5rem;
-  font-family: "Chivo", sans-serif;
-  font-size: 16px;
 }
 
 @media (max-width: 1000px) {

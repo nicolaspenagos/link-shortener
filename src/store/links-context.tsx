@@ -7,7 +7,7 @@ import { url } from "../components/LinkShortener/LinkShortener";
 
 type LinksObj = {
   links: string[];
-  addLink: (longLink: string, shortLink: string) => void;
+  addLink: (longLink: string, shortLink: string) => Promise<string | undefined>;
   latestShortenedLink: string | null;
 };
 
@@ -19,7 +19,7 @@ type LinkObj = {
 
 export const LinksContext = createContext<LinksObj>({
   links: [],
-  addLink: (longLink, shortLink) => {},
+  addLink: async (longLink, shortLink) => "",
   latestShortenedLink: null,
 });
 
@@ -27,7 +27,9 @@ const LinksContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [links, setLinks] = useState<string[]>([]);
-  const [latestShortenedLink, setLatestShortenedLink] = useState<string|null>(null);
+  const [latestShortenedLink, setLatestShortenedLink] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     const unsubscribe = onValue(ref(database, "links"), (snapshot) => {
@@ -48,10 +50,11 @@ const LinksContextProvider: React.FC<React.PropsWithChildren> = ({
         longLink,
         shortLink,
       });
-      setLatestShortenedLink(url+shortLink);
-      console.log('dasjdasjd');
+      const shortenedLink = url + shortLink;
+      setLatestShortenedLink(shortLink);
+      return shortenedLink;
     } catch (error) {
-      console.error("Error writing link to the database", error);
+      throw new Error("Error creating the shortenedlink");
     }
   };
   return (

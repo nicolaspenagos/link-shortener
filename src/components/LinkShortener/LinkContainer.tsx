@@ -10,16 +10,14 @@ const LinkContainer: React.FC<{ link: string }> = ({ link }) => {
   const [showCopiedModal, setShowSuccessModal] = useState<boolean>(false);
   const handleCloseSuccessModal = () => {
     setShowSuccessModal(false);
-  }
+  };
 
-  const handleCopyToClipBoard = ()=>{
+  const handleCopyToClipBoard = () => {
     setShowSuccessModal(true);
     // TODO:Create a utils function to copy to clipboard
-  }
+  };
 
-  const copiedMsg  = (
-    <p>Your link has been copied to the clipboard </p>
-  );
+  const copiedMsg = <p>Your link has been copied to the clipboard </p>;
 
   return (
     <>
@@ -32,10 +30,10 @@ const LinkContainer: React.FC<{ link: string }> = ({ link }) => {
       )}
       <Card>
         <article className={classes.link}>
-          <img src={ConfirmImg} draggable={false} />
+          <img src={ConfirmImg} draggable={false} alt="Confirm icon" />
           <input value={link} disabled={true} />
           <button className={classes.button} onClick={handleCopyToClipBoard}>
-            <img src={CopyImg} />
+            <img src={CopyImg} alt="Copy to clipboard btn" />
           </button>
         </article>
       </Card>
