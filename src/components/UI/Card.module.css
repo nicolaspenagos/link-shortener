@@ -10,7 +10,6 @@
 @media (max-width: 1000px) {
   .card {
     border-radius: 1rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+
   }
 }

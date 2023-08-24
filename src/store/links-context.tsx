@@ -6,9 +6,9 @@ import { createContext } from "react";
 import { url } from "../components/LinkShortener/LinkShortener";
 
 type LinksObj = {
-  links: string[];
   addLink: (longLink: string, shortLink: string) => Promise<string | undefined>;
   latestShortenedLink: string | null;
+  mappedLinks: Map<string, string>;
 };
 
 type LinkObj = {
@@ -18,14 +18,17 @@ type LinkObj = {
 };
 
 export const LinksContext = createContext<LinksObj>({
-  links: [],
   addLink: async (longLink, shortLink) => "",
   latestShortenedLink: null,
+  mappedLinks: new Map<string, string>(),
 });
 
 const LinksContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
+  const [mappedLinks, setMappedLinks] = useState<Map<string, string>>(
+    new Map()
+  );
   const [links, setLinks] = useState<string[]>([]);
   const [latestShortenedLink, setLatestShortenedLink] = useState<string | null>(
     null
@@ -33,11 +36,22 @@ const LinksContextProvider: React.FC<React.PropsWithChildren> = ({
 
   useEffect(() => {
     const unsubscribe = onValue(ref(database, "links"), (snapshot) => {
-      const bigLinksJson: Record<string, LinkObj> = snapshot.val();
-      const shortLinks = Object.values(bigLinksJson).map(
-        (linkObj) => linkObj.shortLink
-      );
-      setLinks(shortLinks);
+      if (snapshot.val()) {
+        const bigLinksJson: Record<string, LinkObj> = snapshot.val();
+        const values = Object.values(bigLinksJson);
+
+        const map = new Map();
+
+        for (const key in bigLinksJson) {
+          const val = bigLinksJson[key];
+          map.set(val.shortLink, val.longLink);
+        }
+
+        const shortLinks = values.map((linkObj) => linkObj.shortLink);
+
+        setMappedLinks(map);
+        setLinks(shortLinks);
+      }
     });
     return () => unsubscribe();
   }, []);
@@ -51,14 +65,16 @@ const LinksContextProvider: React.FC<React.PropsWithChildren> = ({
         shortLink,
       });
       const shortenedLink = url + shortLink;
-      setLatestShortenedLink(shortLink);
+      setLatestShortenedLink(shortenedLink);
       return shortenedLink;
     } catch (error) {
       throw new Error("Error creating the shortenedlink");
     }
   };
   return (
-    <LinksContext.Provider value={{ links, addLink, latestShortenedLink }}>
+    <LinksContext.Provider
+      value={{ addLink, latestShortenedLink, mappedLinks }}
+    >
       {children}
     </LinksContext.Provider>
   );

@@ -13,7 +13,7 @@ import { MODAL_TYPE } from "../UI/Modal";
 import { copyToClipboard } from "../../utils/actions";
 
 export const takensUrls = ["", "myLink", "link"];
-export const url = "onrway-deploy.web.app/";
+export const url = "shorto-link.web.app/";
 
 const LinkShortener: React.FC = () => {
   const linksCtx = useContext(LinksContext);
@@ -30,7 +30,9 @@ const LinkShortener: React.FC = () => {
     blurHandler: shortLinkBlurHandler,
     valueChangedHandler: shortLinkChangeHandler,
     clearHandler: shortLinkClearHandler,
-  } = useInputReducer(isValidHalfBack.bind("", url, linksCtx.links));
+  } = useInputReducer(
+    isValidHalfBack.bind("", url, Array.from(linksCtx.mappedLinks.keys()))
+  );
 
   const [showErrorModal, setShowErrorModal] = useState<boolean>(false);
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
@@ -64,7 +66,8 @@ const LinkShortener: React.FC = () => {
     if (isFormValid) {
       try {
         const shortenedLink = await linksCtx.addLink(linkVal, shortLinkVal);
-        copyToClipboard(shortenedLink || "");
+   
+        await copyToClipboard(shortenedLink || "");
         handleOpenSuccessModal();
         linkClearHandler();
         shortLinkClearHandler();

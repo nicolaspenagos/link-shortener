@@ -1,3 +1,3 @@
-export const copyToClipboard = (str: string) => {
-  navigator.clipboard.writeText(str);
+export const copyToClipboard = async (str: string) => {
+  await navigator.clipboard.writeText(str);
 };

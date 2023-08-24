@@ -9,6 +9,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--mate-black);
   color: var(--light-gray);
+  overflow-x: hidden;
 }
 .root{
   height: 100vh;
